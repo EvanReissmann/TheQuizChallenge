@@ -5,7 +5,8 @@
 }
 body {
     font-family: fantasy;
-    background-color: yellow;
+    background-color:white;
+    text-align: center;
 }
 .page-title {
     font-size: large;
@@ -16,4 +17,13 @@ body {
     background-color: whitesmoke;
     font-family: Georgia, 'Times New Roman', Times, serif;
     border: 0;
+}
+#quiz {
+    display: none;
+}
+#scores {
+    display: none;
+    margin: 0 30px 0 30px;
+    justify-content: space-between;
+    padding: 30px 0 30px 0;
 }
