@@ -9,19 +9,36 @@ function startQuiz() {
   }
 const questions = [
     {
-        question: "practice question",
-        answers: ["test1", "test2", "test3", "test4",],
-        correctAnswer: 2,
+        question: "What do you use to link a class to the css sheet?",
+        answers: ["a #", "a .", "a bracket", "a qoute",],
+        correctAnswer: "a .",
     },
     {
-        question: "practice question 2",
-        answers: ["test1", "test2", "test3", "test4",],
-        correctAnswer: 1,
+        question: "Where do you link the JavaScript file?",
+        answers: ["At the bottom of the HTML", "At the top of the HTML", "In the header", "In a div",],
+        correctAnswer: "At the bottom of the HTML",
+    },
+    {
+        question: "What is the asset called for styling",
+        answers: ["Images", "CSS", "Java script", "ReadMe",],
+        correctAnswer: "CSS",
+    },
+    {
+        question: "How do you screenshot on mac?",
+        answers: ["Screeonfy", "zoom", "control shift 4", "copy and pase",],
+        correctAnswer: "control shift 4",
+    },
+    {
+        question: "How do you start the quiz?",
+        answers: ["start quiz ()", "function get element", "get id element", "use a flex",],
+        correctAnswer: "start quiz ()",
     },
 ]
+
 var currentQuestion= 0;
 var previousAnswer="";
 var score= 0;
+var allScores= [];
 function checkAnswer(correctAnswer,selectedAnswer){
     if (correctAnswer===selectedAnswer){
         previousAnswer="Correct!";
@@ -29,12 +46,14 @@ function checkAnswer(correctAnswer,selectedAnswer){
     } else {previousAnswer="Wrong!";}
     if (currentQuestion < questions.length) {
         buildQuestion();
-    }
+    } else {allScores.push(score);
+    console.log(allScores)}
+    console.log(score);
 }
 function buildQuestion () {
     var question = document.getElementById("quiz");
     var questionHTML = `<div>${questions[currentQuestion].question}</div>`;
-    questions[currentQuestion].answers.forEach(answer => questionHTML+=`<div><button onclick="checkAnswer(${questions[currentQuestion].checkAnswer},${answer})" id="${answer}">${answer}</button></div>`);
+    questions[currentQuestion].answers.forEach(answer => questionHTML+=`<div><button onclick="checkAnswer('${questions[currentQuestion].correctAnswer}','${answer}')" id="${answer}">${answer}</button></div>`);
     if (previousAnswer!==""){
         questionHTML+=`<div>${previousAnswer}</div>`;
     }
