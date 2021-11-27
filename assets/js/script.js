@@ -7,6 +7,24 @@ function startQuiz() {
     header.style.display = "flex";
     buildQuestion();
   }
+// start timer
+function start () {
+    timeLeft = 75;
+    document.getElementById("timeLeft").innerHTML = timeLeft;
+
+    timer = setInterval(function() {
+        timeLeft --;
+        document.getElementById("timeLeft").innerHTML = timeLeft;
+        // Go to end of function when timer at 0
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            endgame()
+        }
+    }, 1000);
+    next();
+}
+
+
 const questions = [
     {
         question: "What do you use to link a class to the css sheet?",
