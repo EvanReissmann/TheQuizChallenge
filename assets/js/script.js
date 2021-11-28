@@ -6,9 +6,10 @@ function startQuiz() {
     quiz.style.display = "block";
     header.style.display = "flex";
     buildQuestion();
+    startTimer()
   }
 // start timer
-function start () {
+function startTimer() {
     timeLeft = 75;
     document.getElementById("timeLeft").innerHTML = timeLeft;
 
