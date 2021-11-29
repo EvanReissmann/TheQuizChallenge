@@ -9,8 +9,8 @@ function startQuiz() {
   startTimer();
 }
 // start timer
+var timeLeft = 75;
 function startTimer() {
-  timeLeft = 75;
   document.getElementById("timeLeft").innerHTML = timeLeft;
 
   timer = setInterval(function () {
@@ -22,7 +22,6 @@ function startTimer() {
       recordScore();
     }
   }, 1000);
-
 }
 
 const questions = [
@@ -78,6 +77,7 @@ function checkAnswer(correctAnswer, selectedAnswer) {
   if (currentQuestion < questions.length) {
     buildQuestion();
   } else {
+    timeLeft = 0;
     recordScore();
   }
 }
@@ -95,21 +95,36 @@ function buildQuestion() {
   currentQuestion++;
 }
 
-function getscore() {
-    localStorage.setItem("highscore", score);
-    localStorage.setItem("highscore", document.getElementById('name').value)
-    
-    getscore();
+function showHighScores() {
+  getScore();
+  const element = document.getElementById("quiz");
+
+  if (allScores === []) {
+    element.innerHTML = "No scores";
+  }
+
+  var html = "";
+
+  for (var i = 0; i < allScores.length; i++) {
+    const key = Object.keys(allScores[i]);
+    html += `<div>${i + 1} ${key}: ${allScores[i][key]}</div>`;
+  }
+
+  element.innerHTML = html;
+}
+
+function getScore() {
+  allScores = JSON.parse(localStorage.getItem("highScore"));
 }
 function recordScore() {
-    document.getElementById("quiz").innerHTML="enter your initials <input type = 'text' id='initials'><button onclick='saveScore()'>submit</button>";
+  document.getElementById("quiz").innerHTML =
+    "enter your initials <input type = 'text' id='initials'><button onclick='saveScore()'>submit</button>";
 }
 function saveScore() {
-   const initials= document.getElementById("initials").value;
-   var finalScore= {};
-   finalScore[initials]=score
-   allScores.push(finalScore);
-
-       console.log(allScores);
-   
+  const initials = document.getElementById("initials").value;
+  var finalScore = {};
+  finalScore[initials] = score;
+  allScores.push(finalScore);
+  localStorage.setItem("highScore", JSON.stringify(allScores));
+  showHighScores();
 }
